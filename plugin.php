@@ -3,7 +3,7 @@
 Plugin Name: Cache stat pages
 Plugin URI: http://yourls.org/
 Description: Cache stat pages. Needs YOURLS 1.5.1+
-Version: 1.0
+Version: 1.0.1
 Author: Ozh
 Author URI: http://ozh.org/
 */
@@ -23,7 +23,10 @@ function ozh_ycache_get_cachefile() {
 // Cache pages
 yourls_add_action( 'pre_html_head', 'ozh_ycache_start' );
 function ozh_ycache_start( $args ) {
-	if( !defined( 'YOURLS_INFOS' ) or !YOURLS_INFOS )
+
+	// Only if we're viewing a stat page
+	$context = $args[0];
+	if( !defined( 'YOURLS_INFOS' ) or !YOURLS_INFOS or $context != 'infos' )
 		return;
 		
 	$cachefile = ozh_ycache_get_cachefile();
