@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Cache stat pages
-Plugin URI: http://yourls.org/
+Plugin URI: https://github.com/YOURLS/cache-stats-pages
 Description: Cache stat pages. Needs YOURLS 1.5.1+
-Version: 1.0.1
+Version: 1.0.2
 Author: Ozh
 Author URI: http://ozh.org/
 */
@@ -49,7 +49,9 @@ function ozh_ycache_start( $args ) {
 yourls_add_action( 'activated_'.yourls_plugin_basename( __FILE__ ), 'ozh_ycache_setup' );
 function ozh_ycache_setup() {
 	$dir = dirname( __FILE__ );
-	mkdir( $dir.'/cache', 0600 );
+    if( !is_dir( $dir.'/cache' ) ) {
+        mkdir( $dir.'/cache', 0600 );
+    }
 }
 
 function ozh_ycache_shutdown() {
